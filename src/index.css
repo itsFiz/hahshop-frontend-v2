@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:#FFFFFF
+  background-color: #ffffff;
 }
 
 code {
@@ -14,33 +14,33 @@ code {
 }
 
 .custom-bg {
-  background-color: #FFFFFF;
-} 
+  background-color: #ffffff;
+}
 
 .text-color {
-  color:#25493F;
+  color: #2d5aa9;
 }
 
 .border-color {
-  border-color: #25493F;
+  border-color: #2d5aa9;
 }
 
 .custom-bg-text {
-  color:#FFFFFF;
+  color: #ffffff;
 }
 
 .bg-color {
-  background-color: #25493F;
+  background-color: #2d5aa9;
 }
 
 .rounded-card {
-  padding: 1.5em .5em .5em;
+  padding: 1.5em 0.5em 0.5em;
   border-radius: 2em;
   box-shadow: 0 5px 10px #00000033;
 }
 
 .form-card {
-  padding: .2em .2em .2em;
+  padding: 0.2em 0.2em 0.2em;
   border-radius: 1em;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Adjust the values here */
 }
@@ -50,5 +50,7 @@ code {
 }
 
 .product-card:hover {
-  transform: scale(1.02); /* You can adjust the scale factor for the desired hover effect */
+  transform: scale(
+    1.02
+  ); /* You can adjust the scale factor for the desired hover effect */
 }

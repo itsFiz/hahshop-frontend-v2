@@ -1,57 +1,57 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ViewMyCart = () => {
-  let user = JSON.parse(sessionStorage.getItem("active-customer"));
+  let user = JSON.parse(sessionStorage.getItem('active-customer'))
 
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+  const customer_jwtToken = sessionStorage.getItem('customer-jwtToken')
 
-  const [carts, setCarts] = useState([]);
-  const [cartAmount, setCartAmount] = useState("0.0");
+  const [carts, setCarts] = useState([])
+  const [cartAmount, setCartAmount] = useState('0.0')
 
-  const [productCart, setProductCart] = useState({});
+  const [productCart, setProductCart] = useState({})
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   useEffect(() => {
     const getAllCart = async () => {
-      const allCart = await retrieveCart();
+      const allCart = await retrieveCart()
       if (allCart) {
-        setCarts(allCart.carts);
+        setCarts(allCart.carts)
 
         if (allCart.totalCartAmount) {
-          setCartAmount(allCart.totalCartAmount);
+          setCartAmount(allCart.totalCartAmount)
         }
       }
-    };
+    }
 
-    getAllCart();
-  }, []);
+    getAllCart()
+  }, [])
 
   const retrieveCart = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/cart/fetch?userId=" + user.id,
+      'http://localhost:8080/api/cart/fetch?userId=' + user.id,
       {
         headers: {
-          Authorization: "Bearer " + customer_jwtToken, // Replace with your actual JWT token
+          Authorization: 'Bearer ' + customer_jwtToken, // Replace with your actual JWT token
         },
       }
-    );
-    console.log(response.data);
-    return response.data;
-  };
+    )
+    console.log(response.data)
+    return response.data
+  }
 
   const deleteCart = (cartId, e) => {
-    const data = { id: cartId, userId: user.id };
-    fetch("http://localhost:8080/api/cart/delete", {
-      method: "DELETE",
+    const data = { id: cartId, userId: user.id }
+    fetch('http://localhost:8080/api/cart/delete', {
+      method: 'DELETE',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + customer_jwtToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + customer_jwtToken,
       },
       body: JSON.stringify(data),
     })
@@ -59,59 +59,59 @@ const ViewMyCart = () => {
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+  }
 
   const incrementCart = (cart, e) => {
-    const data = { id: cart.id, userId: user.id, quantity: cart.quantity + 1 };
-    fetch("http://localhost:8080/api/cart/update", {
-      method: "PUT",
+    const data = { id: cart.id, userId: user.id, quantity: cart.quantity + 1 }
+    fetch('http://localhost:8080/api/cart/update', {
+      method: 'PUT',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + customer_jwtToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + customer_jwtToken,
       },
       body: JSON.stringify(data),
     })
@@ -119,59 +119,59 @@ const ViewMyCart = () => {
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+  }
 
   const decrementCart = (cart, e) => {
-    const data = { id: cart.id, userId: user.id, quantity: cart.quantity - 1 };
-    fetch("http://localhost:8080/api/cart/update", {
-      method: "PUT",
+    const data = { id: cart.id, userId: user.id, quantity: cart.quantity - 1 }
+    fetch('http://localhost:8080/api/cart/update', {
+      method: 'PUT',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + customer_jwtToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + customer_jwtToken,
       },
       body: JSON.stringify(data),
     })
@@ -179,85 +179,85 @@ const ViewMyCart = () => {
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+  }
 
   const checkout = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (carts === null || carts.length < 1) {
-      toast.error("No Products In Cart To Order!!!", {
-        position: "top-center",
+      toast.error('No Products In Cart To Order!!!', {
+        position: 'top-center',
         autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+      })
 
-      return;
+      return
     }
-    navigate("/customer/order/payment", {
+    navigate('/customer/order/payment', {
       state: { priceToPay: cartAmount },
-    });
-  };
+    })
+  }
 
   return (
     <div className="mt-3">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg shadow-lg"
         style={{
-          height: "40rem",
+          height: '40rem',
         }}
       >
         <div
           className="card-header custom-bg-text text-center bg-color"
           style={{
-            borderRadius: "1em",
-            height: "50px",
+            borderRadius: '1em',
+            height: '50px',
           }}
         >
           <h2>My Cart</h2>
@@ -265,7 +265,7 @@ const ViewMyCart = () => {
         <div
           className="card-body"
           style={{
-            overflowY: "auto",
+            overflowY: 'auto',
           }}
         >
           <div className="table-responsive">
@@ -288,13 +288,13 @@ const ViewMyCart = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            'http://localhost:8080/api/product/' +
                             cart.product.image1
                           }
                           class="img-fluid"
                           alt="product_pic"
                           style={{
-                            maxWidth: "90px",
+                            maxWidth: '90px',
                           }}
                         />
                       </td>
@@ -334,7 +334,7 @@ const ViewMyCart = () => {
                         </button>
                       </td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -345,10 +345,10 @@ const ViewMyCart = () => {
             <div
               className="text-color me-2"
               style={{
-                textAlign: "right",
+                textAlign: 'right',
               }}
             >
-              <h5>Total Price: &#8377; {cartAmount}/-</h5>
+              <h5>Total Price: RM {cartAmount}</h5>
             </div>
 
             <div className="float-end me-2">
@@ -364,7 +364,7 @@ const ViewMyCart = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ViewMyCart;
+export default ViewMyCart

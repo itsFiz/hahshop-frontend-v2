@@ -1,103 +1,103 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 const AddCardDetails = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem("active-customer"));
-  const priceToPay = location.state.priceToPay;
+  const location = useLocation()
+  const navigate = useNavigate()
+  const user = JSON.parse(sessionStorage.getItem('active-customer'))
+  const priceToPay = location.state.priceToPay
 
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+  const customer_jwtToken = sessionStorage.getItem('customer-jwtToken')
 
   const [card, setCard] = useState({
-    cardName: "",
-    cardNumber: "",
-    validThrough: "",
-    cvv: "",
-  });
+    cardName: '',
+    cardNumber: '',
+    validThrough: '',
+    cvv: '',
+  })
 
   const handleCardInput = (e) => {
-    setCard({ ...card, [e.target.name]: e.target.value });
-  };
+    setCard({ ...card, [e.target.name]: e.target.value })
+  }
 
   const payForOrder = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:8080/api/order/add?userId=" + user.id, {
-      method: "POST",
+    e.preventDefault()
+    fetch('http://localhost:8080/api/order/add?userId=' + user.id, {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + customer_jwtToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + customer_jwtToken,
       },
     })
       .then((result) => {
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              navigate("/home");
-            }, 2000); // Redirect after 3 seconds
+              navigate('/home')
+            }, 2000) // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 2000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 2000) // Redirect after 3 seconds
           } else {
-            toast.error("It Seems Server is down!!!", {
-              position: "top-center",
+            toast.error('It Seems Server is down!!!', {
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 2000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 2000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+  }
 
   return (
     <div>
       <div class="mt-2 d-flex aligns-items-center justify-content-center">
-        <div class="card form-card border-color" style={{ width: "25rem" }}>
+        <div class="card form-card border-color" style={{ width: '25rem' }}>
           <div className="card-header bg-color custom-bg-text">
             <h5 class="card-title text-center">Payment Details</h5>
           </div>
@@ -165,7 +165,7 @@ const AddCardDetails = () => {
               <input
                 type="submit"
                 class="btn custom-bg-text bg-color"
-                value={"Pay Rs " + priceToPay}
+                value={'Pay RM ' + priceToPay}
               />
 
               <ToastContainer />
@@ -174,7 +174,7 @@ const AddCardDetails = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddCardDetails;
+export default AddCardDetails

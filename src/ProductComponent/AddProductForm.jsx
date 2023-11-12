@@ -1,159 +1,159 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const AddProductForm = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([])
 
-  const seller = JSON.parse(sessionStorage.getItem("active-seller"));
-  const seller_jwtToken = sessionStorage.getItem("seller-jwtToken");
+  const seller = JSON.parse(sessionStorage.getItem('active-seller'))
+  const seller_jwtToken = sessionStorage.getItem('seller-jwtToken')
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   const retrieveAllCategories = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/category/fetch/all"
-    );
-    return response.data;
-  };
+      'http://localhost:8080/api/category/fetch/all'
+    )
+    return response.data
+  }
 
   useEffect(() => {
     const getAllCategories = async () => {
-      const resCategory = await retrieveAllCategories();
+      const resCategory = await retrieveAllCategories()
       if (resCategory) {
-        setCategories(resCategory.categories);
+        setCategories(resCategory.categories)
       }
-    };
+    }
 
-    getAllCategories();
-  }, []);
+    getAllCategories()
+  }, [])
 
-  const [selectedImage1, setSelectImage1] = useState(null);
-  const [selectedImage2, setSelectImage2] = useState(null);
-  const [selectedImage3, setSelectImage3] = useState(null);
+  const [selectedImage1, setSelectImage1] = useState(null)
+  const [selectedImage2, setSelectImage2] = useState(null)
+  const [selectedImage3, setSelectImage3] = useState(null)
 
   const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    price: "",
-    quantity: "",
-    categoryId: "",
-    sellerId: "",
-  });
+    name: '',
+    description: '',
+    price: '',
+    quantity: '',
+    categoryId: '',
+    sellerId: '',
+  })
 
   const handleInput = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
-  };
+    setProduct({ ...product, [e.target.name]: e.target.value })
+  }
 
   const saveProduct = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (seller === null) {
-      toast.error("Seller Id is missing!!!", {
-        position: "top-center",
+      toast.error('Seller Id is missing!!!', {
+        position: 'top-center',
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+      })
 
-      return;
+      return
     }
 
-    const formData = new FormData();
-    formData.append("image1", selectedImage1);
-    formData.append("image2", selectedImage2);
-    formData.append("image3", selectedImage3);
-    formData.append("name", product.name);
-    formData.append("description", product.description);
-    formData.append("price", product.price);
-    formData.append("quantity", product.quantity);
-    formData.append("categoryId", product.categoryId);
-    formData.append("sellerId", seller.id);
+    const formData = new FormData()
+    formData.append('image1', selectedImage1)
+    formData.append('image2', selectedImage2)
+    formData.append('image3', selectedImage3)
+    formData.append('name', product.name)
+    formData.append('description', product.description)
+    formData.append('price', product.price)
+    formData.append('quantity', product.quantity)
+    formData.append('categoryId', product.categoryId)
+    formData.append('sellerId', seller.id)
 
     axios
-      .post("http://localhost:8080/api/product/add", formData, {
+      .post('http://localhost:8080/api/product/add', formData, {
         headers: {
-          Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
+          Authorization: 'Bearer ' + seller_jwtToken, // Replace with your actual JWT token
         },
       })
       .then((resp) => {
-        let response = resp.data;
+        let response = resp.data
 
         if (response.success) {
           toast.success(response.responseMessage, {
-            position: "top-center",
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
 
           setTimeout(() => {
-            navigate("/home");
-          }, 2000); // Redirect after 3 seconds
+            navigate('/home')
+          }, 2000) // Redirect after 3 seconds
         } else if (!response.success) {
           toast.error(response.responseMessage, {
-            position: "top-center",
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
           setTimeout(() => {
-            window.location.reload(true);
-          }, 2000); // Redirect after 3 seconds
+            window.location.reload(true)
+          }, 2000) // Redirect after 3 seconds
         } else {
-          toast.error("It Seems Server is down!!!", {
-            position: "top-center",
+          toast.error('It Seems Server is down!!!', {
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
           setTimeout(() => {
-            window.location.reload(true);
-          }, 2000); // Redirect after 3 seconds
+            window.location.reload(true)
+          }, 2000) // Redirect after 3 seconds
         }
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('Please insert all three images', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 2000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 2000) // Redirect after 3 seconds
+      })
+  }
 
   return (
     <div>
       <div class="mt-2 d-flex aligns-items-center justify-content-center">
         <div
           class="card form-card custom-bg shadow-lg"
-          style={{ width: "45rem" }}
+          style={{ width: '45rem' }}
         >
           <div className="container-fluid">
             <div
               className="card-header bg-color custom-bg-text mt-2 text-center"
               style={{
-                borderRadius: "1em",
-                height: "45px",
+                borderRadius: '1em',
+                height: '45px',
               }}
             >
               <h5 class="card-title">Add Product</h5>
@@ -202,7 +202,7 @@ const AddProductForm = () => {
                     {categories.map((category) => {
                       return (
                         <option value={category.id}> {category.name} </option>
-                      );
+                      )
                     })}
                   </select>
                 </div>
@@ -295,7 +295,7 @@ const AddProductForm = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddProductForm;
+export default AddProductForm
