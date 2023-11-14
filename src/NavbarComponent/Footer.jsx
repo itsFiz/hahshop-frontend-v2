@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <div>
@@ -8,15 +8,9 @@ const Footer = () => {
             <section class="">
               <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color">
-                    E-Commerce Multi-vendor Shop
-                  </h5>
+                  <h5 class="text-uppercase text-color">HaH Shop</h5>
 
-                  <p>
-                    Welcome to our vibrant multivendor marketplace, where a
-                    world of sellers and buyers unite to create endless shopping
-                    possibilities.
-                  </p>
+                  <p>Shopping with a HAH! Where every purchases sparks joy</p>
                 </div>
 
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
@@ -150,14 +144,12 @@ const Footer = () => {
 
           <div class="text-center">
             © 2023 Copyright:
-            <a class="text-color-3" href="https://codewithmurad.com/">
-              codewithmurad.com
-            </a>
+            <a class="text-color-3" href=""></a>
           </div>
         </footer>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

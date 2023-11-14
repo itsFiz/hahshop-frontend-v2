@@ -1,73 +1,73 @@
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import ProductCard from "./ProductCard";
-import GetProductReviews from "../ReviewComponent/GetProductReviews";
-import ProductCarousel from "./ProductCarousel";
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import ProductCard from './ProductCard'
+import GetProductReviews from '../ReviewComponent/GetProductReviews'
+import ProductCarousel from './ProductCarousel'
 
 const Product = () => {
-  const { productId, categoryId } = useParams();
+  const { productId, categoryId } = useParams()
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+  const customer_jwtToken = sessionStorage.getItem('customer-jwtToken')
 
-  let user = JSON.parse(sessionStorage.getItem("active-customer"));
+  let user = JSON.parse(sessionStorage.getItem('active-customer'))
 
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState('')
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([])
 
   const [product, setProduct] = useState({
     seller: {
-      firstName: "",
+      firstName: '',
     },
-  });
+  })
 
   const retrieveProduct = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/product/fetch?productId=" + productId
-    );
+      'http://localhost:8080/api/product/fetch?productId=' + productId
+    )
 
-    return response.data;
-  };
+    return response.data
+  }
 
   useEffect(() => {
     const getProduct = async () => {
-      const retrievedProduct = await retrieveProduct();
+      const retrievedProduct = await retrieveProduct()
 
-      setProduct(retrievedProduct.products[0]);
-    };
+      setProduct(retrievedProduct.products[0])
+    }
 
     const getProductsByCategory = async () => {
-      const allProducts = await retrieveProductsByCategory();
+      const allProducts = await retrieveProductsByCategory()
       if (allProducts) {
-        setProducts(allProducts.products);
+        setProducts(allProducts.products)
       }
-    };
+    }
 
-    getProduct();
-    getProductsByCategory();
-  }, [productId]);
+    getProduct()
+    getProductsByCategory()
+  }, [productId])
 
   const retrieveProductsByCategory = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/product/fetch/category-wise?categoryId=" +
+      'http://localhost:8080/api/product/fetch/category-wise?categoryId=' +
         categoryId
-    );
-    console.log(response.data);
-    return response.data;
-  };
+    )
+    console.log(response.data)
+    return response.data
+  }
 
   const saveProductToCart = (userId) => {
-    fetch("http://localhost:8080/api/cart/add", {
-      method: "POST",
+    fetch('http://localhost:8080/api/cart/add', {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + customer_jwtToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + customer_jwtToken,
       },
       body: JSON.stringify({
         quantity: quantity,
@@ -78,84 +78,84 @@ const Product = () => {
       result.json().then((res) => {
         if (res.success) {
           toast.success(res.responseMessage, {
-            position: "top-center",
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
 
           setTimeout(() => {
-            navigate("/customer/cart");
-          }, 2000); // Redirect after 3 seconds
+            navigate('/customer/cart')
+          }, 2000) // Redirect after 3 seconds
         } else if (!res.success) {
           toast.error(res.responseMessage, {
-            position: "top-center",
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
           setTimeout(() => {
-            window.location.reload(true);
-          }, 2000); // Redirect after 3 seconds
+            window.location.reload(true)
+          }, 2000) // Redirect after 3 seconds
         } else {
-          toast.error("It Seems Server is down!!!", {
-            position: "top-center",
+          toast.error('It Seems Server is down!!!', {
+            position: 'top-center',
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
           setTimeout(() => {
-            window.location.reload(true);
-          }, 2000); // Redirect after 3 seconds
+            window.location.reload(true)
+          }, 2000) // Redirect after 3 seconds
         }
-      });
-    });
-  };
+      })
+    })
+  }
 
   const addToCart = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (user == null) {
-      alert("Please login to buy the products!!!");
+      alert('Please login to buy the products!!!')
     } else if (product.quantity < 1) {
-      toast.error("Product Out Of Stock !!!", {
-        position: "top-center",
+      toast.error('Product Out Of Stock !!!', {
+        position: 'top-center',
         autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+      })
 
-      return;
+      return
     } else {
-      saveProductToCart(user.id);
-      setQuantity("");
+      saveProductToCart(user.id)
+      setQuantity('')
     }
-  };
+  }
 
   const navigateToAddReviewPage = () => {
-    navigate("/product/" + product.id + "/review/add", { state: product });
-  };
+    navigate('/product/' + product.id + '/review/add', { state: product })
+  }
 
   const sellerProductPage = () => {
-    console.log(product.seller.firstName);
+    console.log(product.seller.firstName)
     navigate(
       `/product/seller/${product.seller.id}/${product.seller.firstName}`,
       {
         state: product.seller,
       }
-    );
-  };
+    )
+  }
 
   return (
     <div className="container-fluid">
@@ -176,8 +176,8 @@ const Product = () => {
             <div
               className="card-header bg-color custom-bg-text "
               style={{
-                borderRadius: "1em",
-                height: "50px",
+                borderRadius: '1em',
+                height: '50px',
               }}
             >
               <h3 class="card-title">{product.name}</h3>
@@ -198,11 +198,11 @@ const Product = () => {
               <div className="d-flex justify-content-left">
                 <h4 class="card-text">
                   <b className="text-color" onClick={sellerProductPage}>
-                    Name: {product.seller.firstName + " "}
+                    Name: {product.seller.firstName + ' '}
                   </b>
                 </h4>
                 <h4 class="card-text ms-4">
-                  Contact: {product.seller.emailId + " "}
+                  Contact: {product.seller.emailId + ' '}
                 </h4>
               </div>
             </div>
@@ -211,7 +211,7 @@ const Product = () => {
               <div className="text-center text-color">
                 <p>
                   <span>
-                    <h4>Price : &#8377;{product.price}</h4>
+                    <h4>Price : RM {product.price}</h4>
                   </span>
                 </p>
               </div>
@@ -243,11 +243,11 @@ const Product = () => {
                 <p class="ml-2 text-color">
                   {(() => {
                     if (product.quantity > 0) {
-                      return <b>Stock : {product.quantity}</b>;
+                      return <b>Stock : {product.quantity}</b>
                     } else {
                       return (
                         <b className="text-danger">Stock : Out Of Stock!!!</b>
-                      );
+                      )
                     }
                   })()}
                 </p>
@@ -264,7 +264,7 @@ const Product = () => {
                         onClick={navigateToAddReviewPage}
                       />
                     </div>
-                  );
+                  )
                 }
               })()}
             </div>
@@ -281,13 +281,13 @@ const Product = () => {
           <h2>Related Products:</h2>
           <div className="row row-cols-1 row-cols-md-4 g-4">
             {products.map((product) => {
-              return <ProductCard item={product} />;
+              return <ProductCard item={product} />
             })}
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

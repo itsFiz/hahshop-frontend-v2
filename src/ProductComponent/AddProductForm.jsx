@@ -30,8 +30,6 @@ const AddProductForm = () => {
   }, [])
 
   const [selectedImage1, setSelectImage1] = useState(null)
-  const [selectedImage2, setSelectImage2] = useState(null)
-  const [selectedImage3, setSelectImage3] = useState(null)
 
   const [product, setProduct] = useState({
     name: '',
@@ -64,8 +62,7 @@ const AddProductForm = () => {
 
     const formData = new FormData()
     formData.append('image1', selectedImage1)
-    formData.append('image2', selectedImage2)
-    formData.append('image3', selectedImage3)
+
     formData.append('name', product.name)
     formData.append('description', product.description)
     formData.append('price', product.price)
@@ -246,36 +243,6 @@ const AddProductForm = () => {
                     name="image1"
                     value={product.image1}
                     onChange={(e) => setSelectImage1(e.target.files[0])}
-                    required
-                  />
-                </div>
-
-                <div className="col-md-6 mb-3">
-                  <label for="formFile" class="form-label">
-                    <b> Select 2nd Image</b>
-                  </label>
-                  <input
-                    class="form-control"
-                    type="file"
-                    id="formFile"
-                    name="image2"
-                    value={product.image2}
-                    onChange={(e) => setSelectImage2(e.target.files[0])}
-                    required
-                  />
-                </div>
-
-                <div className="col-md-6 mb-3">
-                  <label for="formFile" class="form-label">
-                    <b> Select 3rd Image</b>
-                  </label>
-                  <input
-                    class="form-control"
-                    type="file"
-                    id="formFile"
-                    name="image3"
-                    value={product.image3}
-                    onChange={(e) => setSelectImage3(e.target.files[0])}
                     required
                   />
                 </div>
