@@ -62,7 +62,7 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <b> Category</b>
+                  <b> Shop By categories</b>
                 </a>
                 <ul class="dropdown-menu custom-bg text-color">
                   {categories.map((category) => {
@@ -85,15 +85,7 @@ const Header = () => {
                 </Link>
               </li>
 
-              <li class="nav-item">
-                <Link
-                  to="/contactus"
-                  class="nav-link active"
-                  aria-current="page"
-                >
-                  <b className="text-color">Contact Us</b>
-                </Link>
-              </li>
+              <li class="nav-item"></li>
             </ul>
 
             <RoleNav />

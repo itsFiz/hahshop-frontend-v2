@@ -1,32 +1,32 @@
-import { Routes, Route } from "react-router-dom";
-import Header from "./NavbarComponent/Header";
-import AdminRegisterForm from "./UserComponent/AdminRegisterForm";
-import UserLoginForm from "./UserComponent/UserLoginForm";
-import UserRegister from "./UserComponent/UserRegister";
-import AboutUs from "./PageComponent/AboutUs";
-import ContactUs from "./PageComponent/ContactUs";
-import HomePage from "./PageComponent/HomePage";
-import AddCategoryForm from "./CategoryComponent/AddCategoryForm";
-import AddProductForm from "./ProductComponent/AddProductForm";
-import Product from "./ProductComponent/Product";
-import AddProductReview from "./ReviewComponent/AddProductReview";
-import GetProductReviews from "./ReviewComponent/GetProductReviews";
-import SellerProducts from "./ProductComponent/SellerProducts";
-import ViewSellerProducts from "./ProductComponent/ViewSellerProducts";
-import UpdateProductForm from "./ProductComponent/UpdateProductForm";
-import ViewAllCategories from "./CategoryComponent/ViewAllCategories";
-import UpdateCategoryForm from "./CategoryComponent/UpdateCategoryForm";
-import ViewAllProducts from "./ProductComponent/ViewAllProducts";
-import AddCardDetails from "./OrderComponent/AddCardDetails";
-import ViewMyOrders from "./OrderComponent/ViewMyOrders";
-import ViewAllOrders from "./OrderComponent/ViewAllOrders";
-import ViewSellerDeliveryPerson from "./UserComponent/ViewSellerDeliveryPerson";
-import ViewSellerOrders from "./OrderComponent/ViewSellerOrders";
-import ViewAllSellers from "./UserComponent/ViewAllSellers";
-import ViewAllDeliveryPersons from "./UserComponent/ViewAllDeliveryPersons";
-import ViewAllCustomers from "./UserComponent/ViewAllCustomers";
-import ViewDeliveryOrders from "./OrderComponent/ViewDeliveryOrders";
-import ViewMyCart from "./CartComponent/ViewMyCart";
+import { Routes, Route } from 'react-router-dom'
+import Header from './NavbarComponent/Header'
+import AdminRegisterForm from './UserComponent/AdminRegisterForm'
+import UserLoginForm from './UserComponent/UserLoginForm'
+import UserRegister from './UserComponent/UserRegister'
+import AboutUs from './PageComponent/AboutUs'
+
+import HomePage from './PageComponent/HomePage'
+import AddCategoryForm from './CategoryComponent/AddCategoryForm'
+import AddProductForm from './ProductComponent/AddProductForm'
+import Product from './ProductComponent/Product'
+import AddProductReview from './ReviewComponent/AddProductReview'
+import GetProductReviews from './ReviewComponent/GetProductReviews'
+import SellerProducts from './ProductComponent/SellerProducts'
+import ViewSellerProducts from './ProductComponent/ViewSellerProducts'
+import UpdateProductForm from './ProductComponent/UpdateProductForm'
+import ViewAllCategories from './CategoryComponent/ViewAllCategories'
+import UpdateCategoryForm from './CategoryComponent/UpdateCategoryForm'
+import ViewAllProducts from './ProductComponent/ViewAllProducts'
+import AddCardDetails from './OrderComponent/AddCardDetails'
+import ViewMyOrders from './OrderComponent/ViewMyOrders'
+import ViewAllOrders from './OrderComponent/ViewAllOrders'
+import ViewSellerDeliveryPerson from './UserComponent/ViewSellerDeliveryPerson'
+import ViewSellerOrders from './OrderComponent/ViewSellerOrders'
+import ViewAllSellers from './UserComponent/ViewAllSellers'
+import ViewAllDeliveryPersons from './UserComponent/ViewAllDeliveryPersons'
+import ViewAllCustomers from './UserComponent/ViewAllCustomers'
+import ViewDeliveryOrders from './OrderComponent/ViewDeliveryOrders'
+import ViewMyCart from './CartComponent/ViewMyCart'
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
         <Route path="/user/seller/register" element={<UserRegister />} />
         <Route path="/seller/delivery/register" element={<UserRegister />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/contactus" element={<ContactUs />} />
+
         <Route
           path="/product/category/:categoryId/:categoryName"
           element={<HomePage />}
@@ -92,7 +92,7 @@ function App() {
         />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

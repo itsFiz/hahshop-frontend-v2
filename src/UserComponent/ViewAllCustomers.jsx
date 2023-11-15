@@ -1,49 +1,49 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import React from "react";
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import React from 'react'
 
 const ViewAllCustomers = () => {
-  const [allCustomer, setAllCustomer] = useState([]);
+  const [allCustomer, setAllCustomer] = useState([])
 
-  const admin_jwtToken = sessionStorage.getItem("admin-jwtToken");
+  const admin_jwtToken = sessionStorage.getItem('admin-jwtToken')
 
   useEffect(() => {
     const getAllUsers = async () => {
-      const allUsers = await retrieveAllUser();
+      const allUsers = await retrieveAllUser()
       if (allUsers) {
-        setAllCustomer(allUsers.users);
+        setAllCustomer(allUsers.users)
       }
-    };
+    }
 
-    getAllUsers();
-  }, []);
+    getAllUsers()
+  }, [])
 
   const retrieveAllUser = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/user/fetch/role-wise?role=Customer",
+      'http://localhost:8080/api/user/fetch/role-wise?role=Customer',
       {
         headers: {
-          Authorization: "Bearer " + admin_jwtToken, // Replace with your actual JWT token
+          Authorization: 'Bearer ' + admin_jwtToken, // Replace with your actual JWT token
         },
       }
-    );
-    console.log(response.data);
-    return response.data;
-  };
+    )
+    console.log(response.data)
+    return response.data
+  }
 
   return (
     <div className="mt-3">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg shadow-lg"
         style={{
-          height: "45rem",
+          height: '45rem',
         }}
       >
         <div
           className="card-header custom-bg-text text-center bg-color"
           style={{
-            borderRadius: "1em",
-            height: "50px",
+            borderRadius: '1em',
+            height: '50px',
           }}
         >
           <h2>All Customers</h2>
@@ -51,7 +51,7 @@ const ViewAllCustomers = () => {
         <div
           className="card-body"
           style={{
-            overflowY: "auto",
+            overflowY: 'auto',
           }}
         >
           <div className="table-responsive">
@@ -84,14 +84,14 @@ const ViewAllCustomers = () => {
                       <td>
                         <b>
                           {customer.address.street +
-                            ", " +
-                            customer.address.city +
-                            ", " +
-                            customer.address.pincode}
+                            ', ' +
+                            customer.address.postcode +
+                            ', ' +
+                            customer.address.city}
                         </b>
                       </td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -99,7 +99,7 @@ const ViewAllCustomers = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ViewAllCustomers;
+export default ViewAllCustomers

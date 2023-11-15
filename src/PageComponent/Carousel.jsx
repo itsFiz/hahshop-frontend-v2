@@ -1,5 +1,6 @@
-import carousel1 from '../images/apple.png'
-import carousel2 from '../images/ps5.png'
+import carousel from '../images/shoppingwithahah.png'
+import carousel1 from '../images/hahshopmerchandise.png'
+import carousel2 from '../images/childrendayy.png'
 import carousel3 from '../images/iphone.png'
 
 const Carousel = () => {
@@ -33,6 +34,9 @@ const Carousel = () => {
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
+          <img src={carousel} class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
           <img src={carousel1} class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">

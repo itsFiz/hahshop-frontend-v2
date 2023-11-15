@@ -1,7 +1,10 @@
+import hahlogo from '../images/hahlogo.png'
+
 const AboutUs = () => {
   return (
     <div className="text-color ms-5 me-5 mr-5 mt-3">
       <h4 className="mb-3">About Us</h4>
+      <img src={hahlogo}></img>
       <b>
         Online shopping is a process whereby consumers directly buy goods,
         services etc. from a seller without an intermediary service over the
@@ -39,7 +42,7 @@ const AboutUs = () => {
         customer, easy to run, etc.
       </b>
     </div>
-  );
-};
+  )
+}
 
-export default AboutUs;
+export default AboutUs
