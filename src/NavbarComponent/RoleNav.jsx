@@ -14,7 +14,9 @@ const RoleNav = () => {
   if (user != null) {
     return <HeaderUser />;
   } else if (admin != null) {
-    return <AdminHeader />;
+    return (
+    <AdminHeader />
+    );
   } else if (seller != null) {
     return <SellerHeader />;
   } else if (deliveryPerson != null) {

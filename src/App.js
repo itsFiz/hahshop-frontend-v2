@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./NavbarComponent/Header";
 import AdminRegisterForm from "./UserComponent/AdminRegisterForm";
 import UserLoginForm from "./UserComponent/UserLoginForm";
@@ -47,6 +47,20 @@ import Allseller from "./Adminside/pages/seller/Allseller";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const navigate = useNavigate();
+
+  const user = JSON.parse(sessionStorage.getItem("active-customer"));
+  const admin = JSON.parse(sessionStorage.getItem("active-admin"));
+  const deliveryPerson = JSON.parse(sessionStorage.getItem("active-delivery"));
+  const seller = JSON.parse(sessionStorage.getItem("active-seller"));
+
+    // Redirect to /dashboard if the user is an admin
+    useEffect(() => {
+      if (admin && admin.role === "Admin") {
+        navigate("/dashboard");
+      }
+    }, [admin, navigate]);
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -57,9 +71,10 @@ function App() {
           <main className="content">
             {/* <Topbar setIsSidebar={setIsSidebar} /> */}
             <Routes>
-              <Route path="/home" element={<Dashboard />} />
+              
               {/* <Route path="/login" element={<LoginPage />} /> */}
-              <Route path="/home" element={<Dashboard />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/category" element={<Category />} />
 
               <Route path="/allorder" element={<Allorders />} />
