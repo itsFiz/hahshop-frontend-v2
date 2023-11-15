@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import RoleNav from './RoleNav'
-import logo from '../images/e_logo.png'
+import logo from '../images/hahlogo.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -62,7 +62,7 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <b> Shop By categories</b>
+                  <b> Shop By Categories</b>
                 </a>
                 <ul class="dropdown-menu custom-bg text-color">
                   {categories.map((category) => {

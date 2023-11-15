@@ -1,7 +1,7 @@
-import carousel from '../images/shoppingwithahah.png'
-import carousel1 from '../images/hahshopmerchandise.png'
-import carousel2 from '../images/childrendayy.png'
-import carousel3 from '../images/iphone.png'
+import carousel1 from '../images/hahcarousel.png'
+import carousel2 from '../images/hahshopmerchandise.png'
+import carousel3 from '../images/childrendayy.png'
+import carousel4 from '../images/hah11sale.png'
 
 const Carousel = () => {
   return (
@@ -31,12 +31,15 @@ const Carousel = () => {
           data-bs-slide-to="2"
           aria-label="Slide 3"
         ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        ></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src={carousel} class="d-block w-100" alt="..." />
-        </div>
-        <div class="carousel-item">
           <img src={carousel1} class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
@@ -44,6 +47,9 @@ const Carousel = () => {
         </div>
         <div class="carousel-item">
           <img src={carousel3} class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src={carousel4} class="d-block w-100" alt="..." />
         </div>
       </div>
       <button
