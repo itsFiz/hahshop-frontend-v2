@@ -14,8 +14,8 @@ const ViewSellerOrders = () => {
   const [tempOrderId, setTempOrderId] = useState("");
 
   const [assignOrderId, setAssignOrderId] = useState("");
-  const [deliveryPersonId, setDeliveryPersonId] = useState("");
 
+  // const [deliveryPersonId, setDeliveryPersonId] = useState("");
   const [allDelivery, setAllDelivery] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -37,15 +37,15 @@ const ViewSellerOrders = () => {
       }
     };
 
-    const getAllUsers = async () => {
-      const allUsers = await retrieveAllUser();
-      if (allUsers) {
-        setAllDelivery(allUsers.users);
-      }
-    };
+    // const getAllUsers = async () => {
+    //   const allUsers = await retrieveAllUser();
+    //   if (allUsers) {
+    //     setAllDelivery(allUsers.users);
+    //   }
+    // };
 
     getAllOrders();
-    getAllUsers();
+    // getAllUsers();
   }, [orderId]);
 
   const retrieveAllorders = async () => {
@@ -61,19 +61,19 @@ const ViewSellerOrders = () => {
     return response.data;
   };
 
-  const retrieveAllUser = async () => {
-    const response = await axios.get(
-      "http://localhost:8080/api/user/fetch/seller/delivery-person?sellerId=" +
-        seller.id,
-      {
-        headers: {
-          Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
-        },
-      }
-    );
-    console.log(response.data);
-    return response.data;
-  };
+  // const retrieveAllUser = async () => {
+  //   const response = await axios.get(
+  //     "http://localhost:8080/api/user/fetch/seller/delivery-person?sellerId=" +
+  //       seller.id,
+  //     {
+  //       headers: {
+  //         Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
+  //       },
+  //     }
+  //   );
+  //   console.log(response.data);
+  //   return response.data;
+  // };
 
   const retrieveOrdersById = async () => {
     const response = await axios.get(
@@ -100,79 +100,79 @@ const ViewSellerOrders = () => {
     handleShow();
   };
 
-  const assignToDelivery = (orderId, e) => {
-    let data = { orderId: assignOrderId, deliveryId: deliveryPersonId };
+  // const assignToDelivery = (orderId, e) => {
+  //   let data = { orderId: assignOrderId, deliveryId: deliveryPersonId };
 
-    fetch("http://localhost:8080/api/order/assign/delivery-person", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + seller_jwtToken,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((result) => {
-        result.json().then((res) => {
-          if (res.success) {
-            toast.success(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setOrders(res.orders);
-            setTimeout(() => {
-              window.location.reload(true);
-            }, 2000); // Redirect after 3 seconds
-          } else if (!res.success) {
-            toast.error(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setTimeout(() => {
-              window.location.reload(true);
-            }, 2000); // Redirect after 3 seconds
-          } else {
-            toast.error("It Seems Server is down!!!", {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setTimeout(() => {
-              window.location.reload(true);
-            }, 2000); // Redirect after 3 seconds
-          }
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+  //   fetch("http://localhost:8080/api/order/assign/delivery-person", {
+  //     method: "PUT",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + seller_jwtToken,
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((result) => {
+  //       result.json().then((res) => {
+  //         if (res.success) {
+  //           toast.success(res.responseMessage, {
+  //             position: "top-center",
+  //             autoClose: 1000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //           });
+  //           setOrders(res.orders);
+  //           setTimeout(() => {
+  //             window.location.reload(true);
+  //           }, 2000); // Redirect after 3 seconds
+  //         } else if (!res.success) {
+  //           toast.error(res.responseMessage, {
+  //             position: "top-center",
+  //             autoClose: 1000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //           });
+  //           setTimeout(() => {
+  //             window.location.reload(true);
+  //           }, 2000); // Redirect after 3 seconds
+  //         } else {
+  //           toast.error("It Seems Server is down!!!", {
+  //             position: "top-center",
+  //             autoClose: 1000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //           });
+  //           setTimeout(() => {
+  //             window.location.reload(true);
+  //           }, 2000); // Redirect after 3 seconds
+  //         }
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       toast.error("It seems server is down", {
+  //         position: "top-center",
+  //         autoClose: 1000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //       setTimeout(() => {
+  //         window.location.reload(true);
+  //       }, 1000); // Redirect after 3 seconds
+  //     });
+  // };
 
   return (
     <div className="mt-3">
@@ -236,7 +236,7 @@ const ViewSellerOrders = () => {
                   <th scope="col">Delivery Person</th>
                   <th scope="col">Delivery Contact</th>
                   <th scope="col">Delivery Time</th>
-                  <th scope="col">Action</th>
+                  {/* <th scope="col">Action</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -285,22 +285,24 @@ const ViewSellerOrders = () => {
                         <b>{order.status}</b>
                       </td>
                       <td>
-                        {(() => {
+                        {/* {(() => {
                           if (order.deliveryPerson) {
                             return <b>{order.deliveryPerson.firstName}</b>;
                           } else {
                             return <b className="text-danger">Pending</b>;
                           }
-                        })()}
+                        })()} */}
+                        <b>PosLaju</b>
                       </td>
                       <td>
-                        {(() => {
+                        {/* {(() => {
                           if (order.deliveryPerson) {
                             return <b>{order.deliveryPerson.phoneNo}</b>;
                           } else {
                             return <b className="text-danger">Pending</b>;
                           }
-                        })()}
+                        })()} */}
+                        <b>PosLaju@express.com</b>
                       </td>
                       <td>
                         {(() => {
@@ -315,7 +317,7 @@ const ViewSellerOrders = () => {
                           }
                         })()}
                       </td>
-                      <td>
+                      {/* <td>
                         {(() => {
                           if (order.deliveryPerson) {
                             return <b>Delivery Assigned</b>;
@@ -331,7 +333,7 @@ const ViewSellerOrders = () => {
                             );
                           }
                         })()}
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 })}
@@ -341,7 +343,7 @@ const ViewSellerOrders = () => {
         </div>
       </div>
 
-      <Modal show={showModal} onHide={handleClose}>
+      {/* <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton className="bg-color custom-bg-text">
           <Modal.Title
             style={{
@@ -402,7 +404,7 @@ const ViewSellerOrders = () => {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
