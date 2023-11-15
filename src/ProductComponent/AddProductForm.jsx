@@ -234,7 +234,7 @@ const AddProductForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label for="formFile" class="form-label">
-                    <b> Select 1st Image</b>
+                    <b> Select Image</b>
                   </label>
                   <input
                     class="form-control"

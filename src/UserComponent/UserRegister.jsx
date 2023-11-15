@@ -1,138 +1,138 @@
-import { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const UserRegister = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const seller = JSON.parse(sessionStorage.getItem("active-seller"));
+  const seller = JSON.parse(sessionStorage.getItem('active-seller'))
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    emailId: "",
-    password: "",
-    phoneNo: "",
-    street: "",
-    city: "",
-    pincode: "",
-    role: "",
-  });
+    firstName: '',
+    lastName: '',
+    emailId: '',
+    password: '',
+    phoneNo: '',
+    street: '',
+    city: '',
+    pincode: '',
+    role: '',
+  })
 
   useEffect(() => {
-    if (document.URL.indexOf("customer") != -1) {
-      user.role = "Customer";
-    } else if (document.URL.indexOf("delivery") != -1) {
-      user.role = "Delivery";
-    } else if (document.URL.indexOf("seller") != -1) {
-      user.role = "Seller";
+    if (document.URL.indexOf('customer') != -1) {
+      user.role = 'Customer'
+    } else if (document.URL.indexOf('delivery') != -1) {
+      user.role = 'Delivery'
+    } else if (document.URL.indexOf('seller') != -1) {
+      user.role = 'Seller'
     }
-  }, []);
+  }, [])
 
   const handleUserInput = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
 
   const saveUser = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    let jwtToken;
+    let jwtToken
 
-    if (user.role === "Delivery") {
-      user.sellerId = seller.id;
+    if (user.role === 'Delivery') {
+      user.sellerId = seller.id
       // jwtToken = sessionStorage.getItem("seller-jwtToken"); // Use bank's JWT token for customer register
     }
 
-    fetch("http://localhost:8080/api/user/register", {
-      method: "POST",
+    fetch('http://localhost:8080/api/user/register', {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
 
         //    Authorization: "Bearer " + jwtToken,
       },
       body: JSON.stringify(user),
     })
       .then((result) => {
-        console.log("result", result);
+        console.log('result', result)
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              navigate("/user/login");
-            }, 1000);
+              navigate('/user/login')
+            }, 1000)
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           } else {
-            toast.error("It seems server is down", {
-              position: "top-center",
+            toast.error('It seems server is down', {
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-    e.preventDefault();
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+    e.preventDefault()
+  }
 
   return (
     <div>
       <div className="mt-2 d-flex aligns-items-center justify-content-center ms-2 me-2 mb-2">
         <div
           className="form-card border-color text-color custom-bg"
-          style={{ width: "50rem" }}
+          style={{ width: '50rem' }}
         >
           <div className="container-fluid">
             <div
               className="card-header bg-color custom-bg-text mt-2 d-flex justify-content-center align-items-center"
               style={{
-                borderRadius: "1em",
-                height: "45px",
+                borderRadius: '1em',
+                height: '45px',
               }}
             >
               <h5 className="card-title">Register Here!!!</h5>
@@ -262,7 +262,7 @@ const UserRegister = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserRegister;
+export default UserRegister

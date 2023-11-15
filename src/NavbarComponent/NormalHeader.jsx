@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const NormalHeader = () => {
   return (
@@ -9,7 +9,7 @@ const NormalHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Register Seller</b>
+          <b className="text-color">Sell at HaHshop</b>
         </Link>
       </li>
 
@@ -19,7 +19,7 @@ const NormalHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Register Customer</b>
+          <b className="text-color">Register</b>
         </Link>
       </li>
 
@@ -29,7 +29,7 @@ const NormalHeader = () => {
         </Link>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default NormalHeader;
+export default NormalHeader
