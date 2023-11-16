@@ -104,93 +104,88 @@ const UserLoginForm = () => {
 
   return (
     <div className="pg-background">
-      <div
-        className=" d-flex aligns-items-center justify-content-center"
-        style={{
-          marginTop: '200px',
-          backgroundImage: 'url("src/images/background-100%.png")',
-          backgroundSize: 'cover',
-        }}
-      >
+      <div className="pg-blur">
         <div
-          className="form-card border-color "
-          style={{ width: '25rem', background: 'rgba( 255, 255, 255, 0.25 )' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+          }}
         >
-          <div className="container-fluid">
-            <div
-              className="card-header mt-2 d-flex justify-content-center align-items-center"
-              style={{
-                borderRadius: '1em',
-                height: '38px',
-              }}
-            >
-              <h4
-                className="card-title"
+          <div
+            className="form-card border-color custom-bg glass"
+            style={{ width: '2git5rem' }}
+          >
+            <div className="container-fluid">
+              <div
+                className="card-header custom-bg-text mt-2 d-flex justify-content-center align-items-center"
                 style={{
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  fontFamily: 'sans-serif',
+                  borderRadius: '1em',
+                  height: '38px',
                 }}
               >
-                Login
-              </h4>
-            </div>
-            <div className="card-body mt-3">
-              <form>
-                <div class="mb-3 text-color">
-                  <label for="role" class="form-label">
-                    <b>User Role</b>
-                  </label>
-                  <select
-                    onChange={handleUserInput}
-                    className="form-control"
-                    name="role"
-                  >
-                    <option value="0">Select Role</option>
-                    <option value="Admin"> Admin </option>
-                    <option value="Customer"> Customer </option>
-                    <option value="Seller"> Seller </option>
-                  </select>
-                </div>
+                <h1 className="card-title" style={{ marginTop: '60px' }}>
+                  Login Page
+                </h1>
+              </div>
+              <div className="card-body mt-5">
+                <form>
+                  <div class="mb-3 text-color">
+                    <label for="role" class="form-label">
+                      <b>User Role</b>
+                    </label>
+                    <select
+                      onChange={handleUserInput}
+                      className="form-control"
+                      name="role"
+                    >
+                      <option value="0">Select Role</option>
+                      <option value="Admin"> Admin </option>
+                      <option value="Customer"> Customer </option>
+                      <option value="Seller"> Seller </option>
+                    </select>
+                  </div>
 
-                <div className="mb-3 text-color">
-                  <label for="emailId" class="form-label">
-                    <b>Email Id</b>
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="emailId"
-                    name="emailId"
-                    onChange={handleUserInput}
-                    value={loginRequest.emailId}
-                  />
-                </div>
-                <div className="mb-3 text-color">
-                  <label for="password" className="form-label">
-                    <b>Password</b>
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    onChange={handleUserInput}
-                    value={loginRequest.password}
-                    autoComplete="on"
-                  />
-                </div>
-                <div className="d-flex aligns-items-center justify-content-center mb-2">
-                  <button
-                    type="submit"
-                    className="btn bg-color custom-bg-text"
-                    onClick={loginAction}
-                  >
-                    Login
-                  </button>
-                </div>
-                <ToastContainer />
-              </form>
+                  <div className="mb-3 text-color">
+                    <label for="emailId" class="form-label">
+                      <b>Email Id</b>
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="emailId"
+                      name="emailId"
+                      onChange={handleUserInput}
+                      value={loginRequest.emailId}
+                    />
+                  </div>
+                  <div className="mb-3 text-color">
+                    <label for="password" className="form-label">
+                      <b>Password</b>
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      onChange={handleUserInput}
+                      value={loginRequest.password}
+                      autoComplete="on"
+                    />
+                  </div>
+                  <div className="d-flex aligns-items-center justify-content-center mb-2">
+                    <button
+                      type="submit"
+                      className="btn bg-color custom-bg-text"
+                      onClick={loginAction}
+                    >
+                      Login
+                    </button>
+                  </div>
+                  <ToastContainer />
+                </form>
+              </div>
             </div>
           </div>
         </div>

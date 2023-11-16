@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
+
 const ViewMyOrders = () => {
   let user = JSON.parse(sessionStorage.getItem("active-customer"));
 
   const [orders, setOrders] = useState([]);
-
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState({});
   const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
 
   useEffect(() => {
@@ -13,6 +14,11 @@ const ViewMyOrders = () => {
       const allOrders = await retrieveCart();
       if (allOrders) {
         setOrders(allOrders.orders);
+        const initialSelectedStatus = {};
+        allOrders.orders.forEach((order) => {
+          initialSelectedStatus[order.orderId] = "";
+        });
+        setSelectedOrderStatus(initialSelectedStatus);
       }
     };
 
@@ -24,17 +30,60 @@ const ViewMyOrders = () => {
       "http://localhost:8080/api/order/fetch/user-wise?userId=" + user.id,
       {
         headers: {
-          Authorization: "Bearer " + customer_jwtToken, // Replace with your actual JWT token
+          Authorization: "Bearer " + customer_jwtToken,
         },
       }
     );
-    console.log(response.data);
     return response.data;
+  };
+
+  const handleStatusChange = async (orderId) => {
+    if (!selectedOrderStatus[orderId]) {
+      alert("Please select a status.");
+      return;
+    }
+
+    const updateData = {
+      orderId: orderId,
+      deliveryStatus: selectedOrderStatus[orderId],
+    };
+
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/api/order/update/delivery-status",
+        updateData,
+        {
+          headers: {
+            Authorization: "Bearer " + customer_jwtToken,
+          },
+        }
+      );
+      console.log(response.data);
+
+      // Update the order status in the local state
+      const updatedOrders = orders.map((order) => {
+        if (order.orderId === orderId) {
+          return { ...order, status: selectedOrderStatus[orderId] };
+        }
+        return order;
+      });
+
+      setOrders(updatedOrders);
+
+      // Clear the selected status for this order
+      setSelectedOrderStatus({
+        ...selectedOrderStatus,
+        [orderId]: "",
+      });
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      // Handle the error, e.g., show an error message.
+    }
   };
 
   const formatDateFromEpoch = (epochTime) => {
     const date = new Date(Number(epochTime));
-    const formattedDate = date.toLocaleString(); // Adjust the format as needed
+    const formattedDate = date.toLocaleString();
 
     return formattedDate;
   };
@@ -75,15 +124,14 @@ const ViewMyOrders = () => {
                   <th scope="col">Quantity</th>
                   <th scope="col">Order Time</th>
                   <th scope="col">Order Status</th>
-                  <th scope="col">Delivery Person</th>
-                  <th scope="col">Delivery Contact</th>
-                  <th scope="col">Delivery Time</th>
+                  
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => {
                   return (
-                    <tr>
+                    <tr key={order.orderId}>
                       <td>
                         <b>{order.orderId}</b>
                       </td>
@@ -93,7 +141,7 @@ const ViewMyOrders = () => {
                             "http://localhost:8080/api/product/" +
                             order.product.image1
                           }
-                          class="img-fluid"
+                          className="img-fluid"
                           alt="product_pic"
                           style={{
                             maxWidth: "90px",
@@ -121,36 +169,33 @@ const ViewMyOrders = () => {
                       <td>
                         <b>{order.status}</b>
                       </td>
+                     
+                     
+                      
                       <td>
-                        {(() => {
-                          if (order.deliveryPerson) {
-                            return <b>{order.deliveryPerson.firstName}</b>;
-                          } else {
-                            return <b className="text-danger">Pending</b>;
+                        <select
+                          className="form-select"
+                          value={selectedOrderStatus[order.orderId]}
+                          onChange={(e) =>
+                            setSelectedOrderStatus({
+                              ...selectedOrderStatus,
+                              [order.orderId]: e.target.value,
+                            })
                           }
-                        })()}
-                      </td>
-                      <td>
-                        {(() => {
-                          if (order.deliveryPerson) {
-                            return <b>{order.deliveryPerson.phoneNo}</b>;
-                          } else {
-                            return <b className="text-danger">Pending</b>;
-                          }
-                        })()}
-                      </td>
-                      <td>
-                        {(() => {
-                          if (order.deliveryDate) {
-                            return (
-                              <b>
-                                {order.deliveryDate + " " + order.deliveryTime}
-                              </b>
-                            );
-                          } else {
-                            return <b className="text-danger">Pending</b>;
-                          }
-                        })()}
+                        >
+                          <option value="">Select Status</option>
+                          
+                          
+                          <option value="Delivered">Delivered</option>
+                          
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <button
+                          className="btn btn-primary mt-2"
+                          onClick={() => handleStatusChange(order.orderId)}
+                        >
+                          Update Status
+                        </button>
                       </td>
                     </tr>
                   );
