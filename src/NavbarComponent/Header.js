@@ -26,9 +26,9 @@ const Header = () => {
   }, [])
 
   return (
-    <div className='transparent'>
-      <nav class="navbar  navbar-expand-lg  text-color">
-        <div class="container-fluid text-color glass">
+    <div>
+      <nav class="navbar  navbar-expand-lg custom-bg text-color">
+        <div class="container-fluid text-color">
           <img
             src={logo}
             width="65"

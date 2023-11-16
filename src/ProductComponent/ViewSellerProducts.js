@@ -113,7 +113,8 @@ const ViewSellerProducts = () => {
   }
 
   return (
-    <div className="mt-3">
+    <div className="mt-3 pg-background">
+      <div className="pg-blur">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg shadow-lg"
         style={{
@@ -121,7 +122,7 @@ const ViewSellerProducts = () => {
         }}
       >
         <div
-          className="card-header custom-bg-text text-center bg-color"
+          className="card-header custom-bg-text text-center glass"
           style={{
             borderRadius: '1em',
             height: '50px',
@@ -135,9 +136,9 @@ const ViewSellerProducts = () => {
             overflowY: 'auto',
           }}
         >
-          <div className="table-responsive">
+          <div className="table-responsive glass">
             <table className="table  text-color text-center">
-              <thead className="table-bordered border-color bg-color custom-bg-text">
+              <thead className="table-bordered border-color glass custom-bg-text">
                 <tr>
                   <th scope="col">Product</th>
                   <th scope="col">Name</th>
@@ -204,6 +205,7 @@ const ViewSellerProducts = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

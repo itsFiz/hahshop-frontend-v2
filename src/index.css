@@ -16,7 +16,7 @@ code {
 }
 
 .custom-bg {
-  background-color: #000;
+  background-color: #00000000;
 }
 
 .text-color {
@@ -100,7 +100,7 @@ body,
 }
 
 .pg-background{
-  background-image: url('C:\Users\Alif Danish\Desktop\hahshop\hahshop-frontend-v2\src\background-100.jpg'); 
+  background-image: url('C:\Users\harit\hahshop-frontend-v2\src\background-100.jpg'); 
   background-size: cover; 
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -162,3 +162,6 @@ h5 {
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap');
 
 
+.MuiMenu-paper {
+  background-color: #000000; /* Replace with your desired background color */
+}
