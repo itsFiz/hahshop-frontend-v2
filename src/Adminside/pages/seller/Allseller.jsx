@@ -170,7 +170,7 @@ const Allseller = () => {
         flex: 0.5,
         renderCell: ({ row }) => (
           <Box display="flex" alignItems="center" justifyContent="center">
-           <Typography sx={{ fontSize: 12 }}> {row.status}</Typography>
+           <Typography sx={{ fontSize: 12, color: row.status === "Active" ? 'green' : 'red' }}> {row.status}</Typography>
             {row.status === "Active" && (
               <CheckCircleOutlineIcon color="success" sx={{ ml: 1 }} />
             )}

@@ -13,10 +13,7 @@ const ProductCard = (product) => {
 
   return (
     <div className="col">
-      <div
-        class="card product-card rounded-card custom-bg h-100 shadow-lg glass-product"
-        
-      >
+      <div class="card product-card rounded-card custom-bg h-100 shadow-lg glass-product">
         <img
           src={'http://localhost:8080/api/product/' + product.item.image1}
           class="card-img-top img-fluid rounded"
@@ -29,7 +26,7 @@ const ProductCard = (product) => {
         />
 
         <div class="card-body text-color">
-          <h5 style={{ fontSize: '12px' }}>
+          <h5 style={{ fontSize: '14px' }}>
             Category:{' '}
             <CategoryNavigator
               item={{
