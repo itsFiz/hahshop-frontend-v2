@@ -127,3 +127,38 @@ height: 100%;
   -webkit-backdrop-filter: blur(8.9px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+.transparent{
+  background-color: #00000000;
+}
+
+
+/* Define different font sizes for h1 to h5 */
+h1 {
+  font-size: 2.5rem; 
+  font-weight: bold;
+
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff; /* Adjust the font size for h2 as needed */
+}
+
+h3 {
+  font-size: 1.75rem; /* Adjust the font size for h3 as needed */
+}
+
+h4 {
+  font-size: 1.5rem; /* Adjust the font size for h4 as needed */
+}
+
+h5 {
+  font-size: 1.25rem; /* Adjust the font size for h5 as needed */
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap');
+
+
