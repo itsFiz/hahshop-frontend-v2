@@ -15,13 +15,12 @@ const ViewSellerOrders = () => {
 
   const [assignOrderId, setAssignOrderId] = useState("");
 
-  // const [deliveryPersonId, setDeliveryPersonId] = useState("");
-  const [allDelivery, setAllDelivery] = useState([]);
-
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState({});
 
   useEffect(() => {
     const getAllOrders = async () => {
@@ -34,18 +33,15 @@ const ViewSellerOrders = () => {
 
       if (allOrders) {
         setOrders(allOrders.orders);
+        const initialSelectedStatus = {};
+        allOrders.orders.forEach((order) => {
+          initialSelectedStatus[order.orderId] = "";
+        });
+        setSelectedOrderStatus(initialSelectedStatus);
       }
     };
 
-    // const getAllUsers = async () => {
-    //   const allUsers = await retrieveAllUser();
-    //   if (allUsers) {
-    //     setAllDelivery(allUsers.users);
-    //   }
-    // };
-
     getAllOrders();
-    // getAllUsers();
   }, [orderId]);
 
   const retrieveAllorders = async () => {
@@ -53,39 +49,23 @@ const ViewSellerOrders = () => {
       "http://localhost:8080/api/order/fetch/seller-wise?sellerId=" + seller.id,
       {
         headers: {
-          Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
+          Authorization: "Bearer " + seller_jwtToken,
         },
       }
     );
-    console.log(response.data);
     return response.data;
   };
-
-  // const retrieveAllUser = async () => {
-  //   const response = await axios.get(
-  //     "http://localhost:8080/api/user/fetch/seller/delivery-person?sellerId=" +
-  //       seller.id,
-  //     {
-  //       headers: {
-  //         Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
-  //       },
-  //     }
-  //   );
-  //   console.log(response.data);
-  //   return response.data;
-  // };
 
   const retrieveOrdersById = async () => {
     const response = await axios.get(
       "http://localhost:8080/api/order/fetch?orderId=" + orderId
     );
-    console.log(response.data);
     return response.data;
   };
 
   const formatDateFromEpoch = (epochTime) => {
     const date = new Date(Number(epochTime));
-    const formattedDate = date.toLocaleString(); // Adjust the format as needed
+    const formattedDate = date.toLocaleString();
 
     return formattedDate;
   };
@@ -100,79 +80,48 @@ const ViewSellerOrders = () => {
     handleShow();
   };
 
-  // const assignToDelivery = (orderId, e) => {
-  //   let data = { orderId: assignOrderId, deliveryId: deliveryPersonId };
+  const handleStatusChange = async (orderId) => {
+    if (!selectedOrderStatus[orderId]) {
+      alert("Please select a status.");
+      return;
+    }
 
-  //   fetch("http://localhost:8080/api/order/assign/delivery-person", {
-  //     method: "PUT",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + seller_jwtToken,
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((result) => {
-  //       result.json().then((res) => {
-  //         if (res.success) {
-  //           toast.success(res.responseMessage, {
-  //             position: "top-center",
-  //             autoClose: 1000,
-  //             hideProgressBar: false,
-  //             closeOnClick: true,
-  //             pauseOnHover: true,
-  //             draggable: true,
-  //             progress: undefined,
-  //           });
-  //           setOrders(res.orders);
-  //           setTimeout(() => {
-  //             window.location.reload(true);
-  //           }, 2000); // Redirect after 3 seconds
-  //         } else if (!res.success) {
-  //           toast.error(res.responseMessage, {
-  //             position: "top-center",
-  //             autoClose: 1000,
-  //             hideProgressBar: false,
-  //             closeOnClick: true,
-  //             pauseOnHover: true,
-  //             draggable: true,
-  //             progress: undefined,
-  //           });
-  //           setTimeout(() => {
-  //             window.location.reload(true);
-  //           }, 2000); // Redirect after 3 seconds
-  //         } else {
-  //           toast.error("It Seems Server is down!!!", {
-  //             position: "top-center",
-  //             autoClose: 1000,
-  //             hideProgressBar: false,
-  //             closeOnClick: true,
-  //             pauseOnHover: true,
-  //             draggable: true,
-  //             progress: undefined,
-  //           });
-  //           setTimeout(() => {
-  //             window.location.reload(true);
-  //           }, 2000); // Redirect after 3 seconds
-  //         }
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       toast.error("It seems server is down", {
-  //         position: "top-center",
-  //         autoClose: 1000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //       });
-  //       setTimeout(() => {
-  //         window.location.reload(true);
-  //       }, 1000); // Redirect after 3 seconds
-  //     });
-  // };
+    const updateData = {
+      orderId: orderId,
+      deliveryStatus: selectedOrderStatus[orderId],
+    };
+
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/api/order/update/delivery-status",
+        updateData,
+        {
+          headers: {
+            Authorization: "Bearer " + seller_jwtToken,
+          },
+        }
+      );
+
+      // Update the order status in the local state
+      const updatedOrders = orders.map((order) => {
+        if (order.orderId === orderId) {
+          return { ...order, status: selectedOrderStatus[orderId] };
+        }
+        return order;
+      });
+
+      setOrders(updatedOrders);
+
+      // Clear the selected status for this order
+      setSelectedOrderStatus({
+        ...selectedOrderStatus,
+        [orderId]: "",
+      });
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      // Handle the error, e.g., show an error message.
+    }
+  };
 
   return (
     <div className="mt-3">
@@ -233,16 +182,14 @@ const ViewSellerOrders = () => {
                   <th scope="col">Customer</th>
                   <th scope="col">Order Time</th>
                   <th scope="col">Order Status</th>
-                  <th scope="col">Delivery Person</th>
-                  <th scope="col">Delivery Contact</th>
-                  <th scope="col">Delivery Time</th>
-                  {/* <th scope="col">Action</th> */}
+                  
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => {
                   return (
-                    <tr>
+                    <tr key={order.orderId}>
                       <td>
                         <b>{order.orderId}</b>
                       </td>
@@ -252,7 +199,7 @@ const ViewSellerOrders = () => {
                             "http://localhost:8080/api/product/" +
                             order.product.image1
                           }
-                          class="img-fluid"
+                          className="img-fluid"
                           alt="product_pic"
                           style={{
                             maxWidth: "90px",
@@ -277,63 +224,39 @@ const ViewSellerOrders = () => {
                       <td>
                         <b>{order.user.firstName}</b>
                       </td>
-
                       <td>
                         <b>{formatDateFromEpoch(order.orderTime)}</b>
                       </td>
                       <td>
                         <b>{order.status}</b>
                       </td>
+                     
+                     
                       <td>
-                        {/* {(() => {
-                          if (order.deliveryPerson) {
-                            return <b>{order.deliveryPerson.firstName}</b>;
-                          } else {
-                            return <b className="text-danger">Pending</b>;
+                        <select
+                          className="form-select"
+                          value={selectedOrderStatus[order.orderId]}
+                          onChange={(e) =>
+                            setSelectedOrderStatus({
+                              ...selectedOrderStatus,
+                              [order.orderId]: e.target.value,
+                            })
                           }
-                        })()} */}
-                        <b>PosLaju</b>
+                        >
+                          <option value="">Select Status</option>
+                          <option value="Pending">Pending</option>
+                          <option value="On the way">On the way</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Processing">Processing</option>
+                          <option value="Cancelled">Cancel</option>
+                        </select>
+                        <button
+                          className="btn btn-primary mt-2"
+                          onClick={() => handleStatusChange(order.orderId)}
+                        >
+                          Update Status
+                        </button>
                       </td>
-                      <td>
-                        {/* {(() => {
-                          if (order.deliveryPerson) {
-                            return <b>{order.deliveryPerson.phoneNo}</b>;
-                          } else {
-                            return <b className="text-danger">Pending</b>;
-                          }
-                        })()} */}
-                        <b>PosLaju@express.com</b>
-                      </td>
-                      <td>
-                        {(() => {
-                          if (order.deliveryDate) {
-                            return (
-                              <b>
-                                {order.deliveryDate + " " + order.deliveryTime}
-                              </b>
-                            );
-                          } else {
-                            return <b className="text-danger">Processing</b>;
-                          }
-                        })()}
-                      </td>
-                      {/* <td>
-                        {(() => {
-                          if (order.deliveryPerson) {
-                            return <b>Delivery Assigned</b>;
-                          } else {
-                            return (
-                              <button
-                                className="btn btn-sm bg-color custom-bg-text ms-2"
-                                variant="primary"
-                                onClick={() => assignDelivery(order.orderId)}
-                              >
-                                Assign Delivery
-                              </button>
-                            );
-                          }
-                        })()}
-                      </td> */}
                     </tr>
                   );
                 })}
@@ -342,69 +265,6 @@ const ViewSellerOrders = () => {
           </div>
         </div>
       </div>
-
-      {/* <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton className="bg-color custom-bg-text">
-          <Modal.Title
-            style={{
-              borderRadius: "1em",
-            }}
-          >
-            Assign To Delivery Person
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="ms-3 mt-3 mb-3 me-3">
-            <form>
-              <div class="mb-3">
-                <label for="title" class="form-label">
-                  <b>Order Id</b>
-                </label>
-                <input type="text" class="form-control" value={assignOrderId} />
-              </div>
-
-              <div className=" mb-3">
-                <label className="form-label">
-                  <b>Delivery Person</b>
-                </label>
-
-                <select
-                  name="deliveryPersonId"
-                  onChange={(e) => setDeliveryPersonId(e.target.value)}
-                  className="form-control"
-                >
-                  <option value="">Select Delivery Person</option>
-
-                  {allDelivery.map((delivery) => {
-                    return (
-                      <option value={delivery.id}>
-                        {delivery.firstName + " " + delivery.lastName}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              <div className="d-flex aligns-items-center justify-content-center mb-2">
-                <button
-                  type="submit"
-                  onClick={() => assignToDelivery(assignOrderId)}
-                  class="btn bg-color custom-bg-text"
-                >
-                  Assign
-                </button>
-              </div>
-
-              <ToastContainer />
-            </form>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </div>
   );
 };

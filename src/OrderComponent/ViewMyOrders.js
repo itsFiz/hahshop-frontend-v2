@@ -184,10 +184,11 @@ const ViewMyOrders = () => {
                           }
                         >
                           <option value="">Select Status</option>
-                          <option value="Pending">Pending</option>
-                          <option value="On the way">On the way</option>
+                          
+                          
                           <option value="Delivered">Delivered</option>
-                          <option value="Processing">Processing</option>
+                          
+                          <option value="Cancelled">Cancelled</option>
                         </select>
                         <button
                           className="btn btn-primary mt-2"
