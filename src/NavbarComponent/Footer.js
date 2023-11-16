@@ -8,7 +8,30 @@ const Footer = () => {
             <section class="">
               <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                  <img src="hah.png" style={{ width: '160px' }}></img>
+                  <img
+                    src="hah.png"
+                    style={{
+                      width: '160px',
+                      animation: 'bounce 1s infinite', // Apply the bounce animation
+                    }}
+                    alt="Image"
+                  />
+
+                  <style>
+                    {`
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15px); // Adjust the distance of the bounce
+      }
+      60% {
+        transform: translateY(-5px); // Adjust the distance of the bounce
+      }
+    }
+  `}
+                  </style>
 
                   <p>Shopping with a HAH! </p>
                   <p>Where every purchases sparks joy!</p>
@@ -128,7 +151,7 @@ const Footer = () => {
           </div>
 
           <div class="text-center">
-            © 2023 Copyright hahshop.com
+            © 2023 HaHShop All Rights Reserved
             <a class="text-color-3" href=""></a>
           </div>
         </footer>
