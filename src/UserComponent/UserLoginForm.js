@@ -115,18 +115,21 @@ const UserLoginForm = () => {
         >
           <div
             className="form-card border-color custom-bg glass"
-            style={{ width: '2git5rem' }}
+            style={{ width: '25%', height: '500px' }}
           >
             <div className="container-fluid">
               <div
                 className="card-header custom-bg-text mt-2 d-flex justify-content-center align-items-center"
                 style={{
-                  borderRadius: '1em',
+                  borderRadius: '1rem',
                   height: '38px',
                 }}
               >
-                <h1 className="card-title" style={{ marginTop: '60px' }}>
-                  Login Page
+                <h1
+                  className="card-title"
+                  style={{ marginTop: '60px', fontSize: '30px' }}
+                >
+                  Login
                 </h1>
               </div>
               <div className="card-body mt-5">

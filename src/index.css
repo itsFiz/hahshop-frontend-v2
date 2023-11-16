@@ -67,31 +67,30 @@ body,
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.app{
+.app {
   display: flex;
   position: relative;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
-
 }
 
 /* Track */
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background: #e0e0e0;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: #888;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-track:hover{
+::-webkit-scrollbar-track:hover {
   background: #555;
 }
-.glass{
+.glass {
   background: rgba(255, 255, 255, 0.255);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -100,18 +99,18 @@ body,
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.pg-background{
-  background-image: url('C:/Users/harit/hahshop-frontend-v2/src/image1.jpg'); 
-  background-size: cover; 
+.pg-background {
+  background-image: url('C:/Users/ACER/Desktop/FIZ/UOB Training/finale/ecommerce-multivendor-frontend-master/src/images/background-100%.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-.pg-blur{
+.pg-blur {
   background: rgba(0, 0, 0, 0.45);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(6px);
--webkit-backdrop-filter: blur(6px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

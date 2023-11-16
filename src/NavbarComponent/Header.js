@@ -63,7 +63,9 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <b style={{ fontSize: '16px' }}>Shop By Categories</b>
+                  <b style={{}} className="">
+                    Shop By Categories
+                  </b>
                 </a>
                 <ul class="dropdown-menu custom-bg text-color">
                   {categories.map((category) => {

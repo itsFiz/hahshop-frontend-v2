@@ -98,13 +98,13 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: colors.grey
+              default: colors.grey,
             },
           }),
     },
     typography: {
       fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-      fontSize: 14,
+      fontSize: 16,
       h1: {
         fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
         fontSize: 40,
@@ -152,4 +152,3 @@ export const useMode = () => {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
   return [theme, colorMode]
 }
-
