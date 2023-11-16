@@ -16,15 +16,13 @@ const UserRegister = () => {
     phoneNo: '',
     street: '',
     city: '',
-    pincode: '',
+    postcode: '',
     role: '',
   })
 
   useEffect(() => {
     if (document.URL.indexOf('customer') != -1) {
       user.role = 'Customer'
-    } else if (document.URL.indexOf('delivery') != -1) {
-      user.role = 'Delivery'
     } else if (document.URL.indexOf('seller') != -1) {
       user.role = 'Seller'
     }
@@ -38,11 +36,6 @@ const UserRegister = () => {
     e.preventDefault()
 
     let jwtToken
-
-    if (user.role === 'Delivery') {
-      user.sellerId = seller.id
-      // jwtToken = sessionStorage.getItem("seller-jwtToken"); // Use bank's JWT token for customer register
-    }
 
     fetch('http://localhost:8080/api/user/register', {
       method: 'POST',
@@ -135,7 +128,7 @@ const UserRegister = () => {
                 height: '45px',
               }}
             >
-              <h5 className="card-title">Register Here!!!</h5>
+              <h5 className="card-title">Register Here!</h5>
             </div>
             <div className="card-body mt-3">
               <form className="row g-3" onSubmit={saveUser}>
@@ -241,10 +234,10 @@ const UserRegister = () => {
                   <input
                     type="number"
                     className="form-control"
-                    id="pincode"
-                    name="pincode"
+                    id="postcode"
+                    name="postcode"
                     onChange={handleUserInput}
-                    value={user.pincode}
+                    value={user.postcode}
                   />
                 </div>
 

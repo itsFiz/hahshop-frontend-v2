@@ -26,7 +26,6 @@ const Header = () => {
   }, [])
 
   return (
-    
     <div>
       <nav class="navbar  navbar-expand-lg custom-bg text-color">
         <div class="container-fluid text-color">

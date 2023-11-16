@@ -8,9 +8,10 @@ const Footer = () => {
             <section class="">
               <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color">HaH Shop</h5>
+                  <img src="hah.png" style={{ width: '160px' }}></img>
 
-                  <p>Shopping with a HAH! Where every purchases sparks joy</p>
+                  <p>Shopping with a HAH! </p>
+                  <p>Where every purchases sparks joy!</p>
                 </div>
 
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
@@ -124,26 +125,10 @@ const Footer = () => {
             </section>
 
             <hr class="mb-4" />
-
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3 text-color">Login from here</span>
-                <Link to="/user/login" class="active">
-                  <button
-                    type="button"
-                    class="btn btn-outline-light btn-rounded bg-color custom-bg-text"
-                  >
-                    Log in
-                  </button>
-                </Link>
-              </p>
-            </section>
-
-            <hr class="mb-4" />
           </div>
 
           <div class="text-center">
-            © 2023 Copyright:
+            © 2023 Copyright hahshop.com
             <a class="text-color-3" href=""></a>
           </div>
         </footer>
