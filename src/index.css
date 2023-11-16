@@ -28,11 +28,11 @@ code {
 }
 
 .custom-bg-text {
-  color: #000000;
+  color: #fff;
 }
 
 .bg-color {
-  background-color: #f7f7f7;
+  background-color: #1b2845;
 }
 
 .rounded-card {
@@ -99,9 +99,9 @@ body,
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.pg-background{
-  background-image: url('C:\Users\harit\hahshop-frontend-v2\src\background-100.jpg'); 
-  background-size: cover; 
+.pg-background {
+  background-image: url('C:/Users/ACER/Desktop/FIZ/UOB Training/finale/ecommerce-multivendor-frontend-master/src/background-100.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
@@ -109,16 +109,15 @@ body,
 
 .pg-blur {
   background: rgba(0, 0, 0, 0.45);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(6px);
--webkit-backdrop-filter: blur(6px);
-border: 1px solid rgba(255, 255, 255, 0.3);
-height: 100vh;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 100vh;
 }
 
-
-.glass-product{
+.glass-product {
   background: rgba(195, 193, 193, 0.255);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
