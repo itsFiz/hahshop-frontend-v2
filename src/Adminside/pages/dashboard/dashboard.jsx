@@ -7,12 +7,12 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/Barchart";
-import StatBox from "../../components/StatBox";
 import { usePDF } from "react-to-pdf";
 import SalesBox from "../../components/SalesBox";
 import ProductBox from "../../components/ProductBox";
-import Sidebar from "../global/SideBar";
 import { useState} from "react";
+import SellerBox from "../../components/SellerBox";
+import UserBox from "../../components/UserBox";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -26,7 +26,6 @@ const Dashboard = () => {
     }
   };
 
-  const [isSidebar, setIsSidebar] = useState(true);
 
   return (
     <Box m="20px" ref={targetRef}>
@@ -101,7 +100,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <ProductBox
+          <SellerBox
             title="134"
             subtitle="New Sellers"
             // progress="0.80"
@@ -121,8 +120,8 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <SalesBox
-            subtitle="New Users"
+          <UserBox
+            subtitle="New Customers"
             icon={
               <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -150,14 +149,7 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                2023 Revenue Earned
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-              >
-                $59,342.32
+                2023 Revenue Earned by Month
               </Typography>
             </Box>
             <Box>
