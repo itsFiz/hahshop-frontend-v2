@@ -136,7 +136,8 @@ function CategoryForm() {
             <TextField
               fullWidth
               id="title"
-              variant="outlined"
+              style={{backgroundColor: "white"}}
+              variant="filled"
               placeholder="Enter category.."
               onChange={(e) => {
                 setName(e.target.value);
