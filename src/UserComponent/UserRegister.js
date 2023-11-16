@@ -114,21 +114,22 @@ const UserRegister = () => {
   }
 
   return (
-    <div>
+    <div className='pg-background'>
+      <div className='pg-blur'>
       <div className="mt-2 d-flex aligns-items-center justify-content-center ms-2 me-2 mb-2">
         <div
-          className="form-card border-color text-color custom-bg"
-          style={{ width: '50rem' }}
+          className="form-card border-color text-color custom-bg glass"
+          style={{ width: '50rem', marginTop: '100px' }}
         >
           <div className="container-fluid">
             <div
-              className="card-header bg-color custom-bg-text mt-2 d-flex justify-content-center align-items-center"
+              className="card-header custom-bg-text mt-2 d-flex justify-content-center align-items-center"
               style={{
                 borderRadius: '1em',
                 height: '45px',
               }}
             >
-              <h5 className="card-title">Register Here!</h5>
+              <h2 className="card-title">Register Here!</h2>
             </div>
             <div className="card-body mt-3">
               <form className="row g-3" onSubmit={saveUser}>
@@ -254,6 +255,7 @@ const UserRegister = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

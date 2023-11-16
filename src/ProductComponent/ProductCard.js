@@ -14,15 +14,8 @@ const ProductCard = (product) => {
   return (
     <div className="col">
       <div
-        class="card product-card rounded-card custom-bg h-100 shadow-lg"
-        style={{
-          background: 'rgba(67, 97, 206, 0.1)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-          backdropFilter: 'blur(3.5px)',
-          WebkitBackdropFilter: 'blur(3.5px)',
-          borderRadius: '10px',
-          border: '1px solid rgba(67, 97, 206, 0.16)',
-        }}
+        class="card product-card rounded-card custom-bg h-100 shadow-lg glass-product"
+        
       >
         <img
           src={'http://localhost:8080/api/product/' + product.item.image1}
