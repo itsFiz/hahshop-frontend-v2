@@ -1,50 +1,61 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ViewSellerProducts = () => {
-  const seller = JSON.parse(sessionStorage.getItem("active-seller"));
+  const seller = JSON.parse(sessionStorage.getItem('active-seller'))
 
-  const seller_jwtToken = sessionStorage.getItem("seller-jwtToken");
+  const seller_jwtToken = sessionStorage.getItem('seller-jwtToken')
 
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([])
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
+
+  const handleDeleteConfirmation = (productId) => {
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this product?'
+    )
+
+    if (isConfirmed) {
+      deleteProduct(productId)
+      // Perform any additional actions after deletion if needed
+    }
+  }
 
   useEffect(() => {
     const getAllProducts = async () => {
-      const allProducts = await retrieveAllProducts();
+      const allProducts = await retrieveAllProducts()
       if (allProducts) {
-        setAllProducts(allProducts.products);
+        setAllProducts(allProducts.products)
       }
-    };
+    }
 
-    getAllProducts();
-  }, []);
+    getAllProducts()
+  }, [])
 
   const retrieveAllProducts = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/product/fetch/seller-wise?sellerId=" +
+      'http://localhost:8080/api/product/fetch/seller-wise?sellerId=' +
         seller.id
-    );
-    console.log(response.data);
-    return response.data;
-  };
+    )
+    console.log(response.data)
+    return response.data
+  }
 
   const deleteProduct = (productId, e) => {
     fetch(
-      "http://localhost:8080/api/product/delete?productId=" +
+      'http://localhost:8080/api/product/delete?productId=' +
         productId +
-        "&sellerId=" +
+        '&sellerId=' +
         seller.id,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + seller_jwtToken,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + seller_jwtToken,
         },
       }
     )
@@ -52,68 +63,68 @@ const ViewSellerProducts = () => {
         result.json().then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
 
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           } else if (!res.success) {
             toast.error(res.responseMessage, {
-              position: "top-center",
+              position: 'top-center',
               autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
-            });
+            })
             setTimeout(() => {
-              window.location.reload(true);
-            }, 1000); // Redirect after 3 seconds
+              window.location.reload(true)
+            }, 1000) // Redirect after 3 seconds
           }
-        });
+        })
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
+        console.error(error)
+        toast.error('It seems server is down', {
+          position: 'top-center',
           autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+        })
         setTimeout(() => {
-          window.location.reload(true);
-        }, 1000); // Redirect after 3 seconds
-      });
-  };
+          window.location.reload(true)
+        }, 1000) // Redirect after 3 seconds
+      })
+  }
 
   const updateProduct = (product) => {
-    navigate("/seller/product/update", { state: product });
-  };
+    navigate('/seller/product/update', { state: product })
+  }
 
   return (
     <div className="mt-3">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg shadow-lg"
         style={{
-          height: "45rem",
+          height: '45rem',
         }}
       >
         <div
           className="card-header custom-bg-text text-center bg-color"
           style={{
-            borderRadius: "1em",
-            height: "50px",
+            borderRadius: '1em',
+            height: '50px',
           }}
         >
           <h2>My Products</h2>
@@ -121,7 +132,7 @@ const ViewSellerProducts = () => {
         <div
           className="card-body"
           style={{
-            overflowY: "auto",
+            overflowY: 'auto',
           }}
         >
           <div className="table-responsive">
@@ -144,13 +155,13 @@ const ViewSellerProducts = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            'http://localhost:8080/api/product/' +
                             product.image1
                           }
                           class="img-fluid"
                           alt="product_pic"
                           style={{
-                            maxWidth: "90px",
+                            maxWidth: '90px',
                           }}
                         />
                       </td>
@@ -179,14 +190,14 @@ const ViewSellerProducts = () => {
                         </button>
 
                         <button
-                          onClick={() => deleteProduct(product.id)}
+                          onClick={() => handleDeleteConfirmation(product.id)}
                           className="btn btn-sm bg-color custom-bg-text ms-2"
                         >
                           Delete
                         </button>
                       </td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -194,7 +205,7 @@ const ViewSellerProducts = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ViewSellerProducts;
+export default ViewSellerProducts
