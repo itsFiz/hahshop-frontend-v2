@@ -14,11 +14,11 @@ code {
 }
 
 .custom-bg {
-  background-color: #ffffff;
+  background-color: #000;
 }
 
 .text-color {
-  color: #2d5aa9;
+  color: #a8c0ff;
 }
 
 .border-color {
@@ -26,11 +26,11 @@ code {
 }
 
 .custom-bg-text {
-  color: #ffffff;
+  color: #000;
 }
 
 .bg-color {
-  background-color: #2d5aa9;
+  background-color: #a8c0ff;
 }
 
 .rounded-card {
@@ -51,6 +51,6 @@ code {
 
 .product-card:hover {
   transform: scale(
-    1.02
+    1.05
   ); /* You can adjust the scale factor for the desired hover effect */
 }

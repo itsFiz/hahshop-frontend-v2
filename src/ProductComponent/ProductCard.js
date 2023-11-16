@@ -13,7 +13,17 @@ const ProductCard = (product) => {
 
   return (
     <div className="col">
-      <div class="card product-card rounded-card custom-bg h-100 shadow-lg">
+      <div
+        class="card product-card rounded-card custom-bg h-100 shadow-lg"
+        style={{
+          background: 'rgba(67, 97, 206, 0.1)',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+          backdropFilter: 'blur(3.5px)',
+          WebkitBackdropFilter: 'blur(3.5px)',
+          borderRadius: '10px',
+          border: '1px solid rgba(67, 97, 206, 0.16)',
+        }}
+      >
         <img
           src={'http://localhost:8080/api/product/' + product.item.image1}
           class="card-img-top img-fluid rounded"
@@ -26,7 +36,7 @@ const ProductCard = (product) => {
         />
 
         <div class="card-body text-color">
-          <h5>
+          <h5 style={{ fontSize: '12px' }}>
             Category:{' '}
             <CategoryNavigator
               item={{
@@ -40,9 +50,12 @@ const ProductCard = (product) => {
               <b>{product.item.name}</b>
             </div>
           </h5>
-          <p className="card-text">
-            <b>{descriptionToShow(product.item.description, 50)}</b>
-          </p>
+          <h5
+            className="card-text"
+            style={{ fontSize: '15px', fontWeight: 'normal' }}
+          >
+            {descriptionToShow(product.item.description, 50)}
+          </h5>
         </div>
         <div class="card-footer">
           <div className="d-flex justify-content-between mt-2">
@@ -56,7 +69,9 @@ const ProductCard = (product) => {
             <div className="text-color">
               <p>
                 <span>
-                  <h4>Price : RM {product.item.price}</h4>
+                  <h4 style={{ fontSize: '20px', color: '#FFF' }}>
+                    RM {product.item.price}
+                  </h4>
                 </span>
               </p>
             </div>

@@ -38,7 +38,7 @@ const Header = () => {
           />
           <Link to="/" class="navbar-brand">
             <i>
-              <b className="text-color ms-2"> Shop</b>
+              <b className="text-color ms-2"> HaHShop</b>
             </i>
           </Link>
 
@@ -50,6 +50,7 @@ const Header = () => {
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            style={{ color: '#a8c0ff', background: '#FFF' }}
           >
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -72,7 +73,7 @@ const Header = () => {
                           to={`/product/category/${category.id}/${category.name}`}
                           class="dropdown-item  text-center"
                         >
-                          <b>{category.name}</b>
+                          <b style={{ color: '#a8c0ff' }}>{category.name}</b>
                         </Link>
                       </li>
                     )

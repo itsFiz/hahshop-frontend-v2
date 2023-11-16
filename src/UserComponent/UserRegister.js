@@ -236,7 +236,7 @@ const UserRegister = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <label htmlFor="pincode" className="form-label">
-                    <b>Pincode</b>
+                    <b>Postcode</b>
                   </label>
                   <input
                     type="number"
