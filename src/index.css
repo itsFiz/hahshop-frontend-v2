@@ -20,7 +20,7 @@ code {
 }
 
 .text-color {
-  color: rgb(247, 247, 247);
+  color: rgb(255, 255, 255);
 }
 
 .border-color {
@@ -28,11 +28,11 @@ code {
 }
 
 .custom-bg-text {
-  color: #000;
+  color: #000000;
 }
 
 .bg-color {
-  background-color: #a8c0ff;
+  background-color: #f7f7f7;
 }
 
 .rounded-card {
@@ -91,4 +91,27 @@ body,
 ::-webkit-scrollbar-track:hover{
   background: #555;
 }
+.glass{
+  background: rgba(255, 255, 255, 0.255);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
 
+.pg-background{
+  background-image: url('C:/Users/harit/hahshop-frontend-v2/src/image1.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.pg-blur{
+  background: rgba(0, 0, 0, 0.45);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}

@@ -109,32 +109,34 @@ const UserLoginForm = () => {
   }
 
   return (
-    <div>
-      <div className="mt-2 d-flex aligns-items-center justify-content-center">
+    <div className='pg-background'>
+      <div className='pg-blur'>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      
         <div
-          className="form-card border-color custom-bg"
-          style={{ width: '25rem' }}
+          className="form-card border-color custom-bg glass"
+          style={{ width: '2git5rem'}}
         >
           <div className="container-fluid">
             <div
-              className="card-header bg-color custom-bg-text mt-2 d-flex justify-content-center align-items-center"
+              className="card-header custom-bg-text mt-2 d-flex justify-content-center align-items-center"
               style={{
                 borderRadius: '1em',
-                height: '38px',
-              }}
+                height: '38px'              }}
             >
-              <h4 className="card-title">User Login</h4>
+              <h1 className="card-title" style={{marginTop: '60px'}}>Login Page</h1>
             </div>
-            <div className="card-body mt-3">
+            <div className="card-body mt-5">
               <form>
-                <div class="mb-3 text-color">
-                  <label for="role" class="form-label">
+                <div class="mb-3 text-color" >
+                  <label for="role" class="form-label" >
                     <b>User Role</b>
                   </label>
                   <select
                     onChange={handleUserInput}
                     className="form-control"
                     name="role"
+                    
                   >
                     <option value="0">Select Role</option>
                     <option value="Admin"> Admin </option>
@@ -185,6 +187,7 @@ const UserLoginForm = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
