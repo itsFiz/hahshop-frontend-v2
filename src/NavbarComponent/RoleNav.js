@@ -19,8 +19,6 @@ const RoleNav = () => {
     );
   } else if (seller != null) {
     return <SellerHeader />;
-  } else if (deliveryPerson != null) {
-    return <DeliveryHeader />;
   } else {
     return <NormalHeader />;
   }
