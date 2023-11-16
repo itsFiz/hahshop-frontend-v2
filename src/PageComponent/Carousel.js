@@ -1,4 +1,4 @@
-import carousel1 from '../images/hahcarousel.png'
+import carousel1 from '../images/carousel.png'
 import carousel2 from '../images/hahshopmerchandise.png'
 import carousel3 from '../images/childrendayy.png'
 import carousel4 from '../images/hah11sale.png'

@@ -47,12 +47,6 @@ const UserLoginForm = () => {
                   JSON.stringify(res.user)
                 )
                 sessionStorage.setItem('seller-jwtToken', res.jwtToken)
-              } else if (res.user.role === 'Delivery') {
-                sessionStorage.setItem(
-                  'active-delivery',
-                  JSON.stringify(res.user)
-                )
-                sessionStorage.setItem('delivery-jwtToken', res.jwtToken)
               }
             }
 
@@ -109,21 +103,37 @@ const UserLoginForm = () => {
   }
 
   return (
-    <div>
-      <div className="mt-2 d-flex aligns-items-center justify-content-center">
+    <div className="pg-background">
+      <div
+        className=" d-flex aligns-items-center justify-content-center"
+        style={{
+          marginTop: '200px',
+          backgroundImage: 'url("src/images/background-100%.png")',
+          backgroundSize: 'cover',
+        }}
+      >
         <div
-          className="form-card border-color custom-bg"
-          style={{ width: '25rem' }}
+          className="form-card border-color "
+          style={{ width: '25rem', background: 'rgba( 255, 255, 255, 0.25 )' }}
         >
           <div className="container-fluid">
             <div
-              className="card-header bg-color custom-bg-text mt-2 d-flex justify-content-center align-items-center"
+              className="card-header mt-2 d-flex justify-content-center align-items-center"
               style={{
                 borderRadius: '1em',
                 height: '38px',
               }}
             >
-              <h4 className="card-title">User Login</h4>
+              <h4
+                className="card-title"
+                style={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  fontFamily: 'sans-serif',
+                }}
+              >
+                Login
+              </h4>
             </div>
             <div className="card-body mt-3">
               <form>
