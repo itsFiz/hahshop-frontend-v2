@@ -139,21 +139,22 @@ const AddProductForm = () => {
   }
 
   return (
-    <div>
+    <div className='pg-background'>
+      <div className='pg-blur'>
       <div class="mt-2 d-flex aligns-items-center justify-content-center">
         <div
-          class="card form-card custom-bg shadow-lg"
-          style={{ width: '45rem' }}
+          class="card form-card custom-bg shadow-lg glass"
+          style={{ width: '45rem', marginTop:'80px' }}
         >
           <div className="container-fluid">
             <div
-              className="card-header bg-color custom-bg-text mt-2 text-center"
+              className=" custom-bg-text mt-5 text-center"
               style={{
                 borderRadius: '1em',
                 height: '45px',
               }}
             >
-              <h5 class="card-title">Add Product</h5>
+              <h2 class="card-title">Add Product</h2>
             </div>
             <div class="card-body text-color">
               <form className="row g-3">
@@ -261,6 +262,7 @@ const AddProductForm = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

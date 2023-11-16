@@ -65,7 +65,9 @@ function App() {
         <CssBaseline />
         <div className="app">
           {/* <Sidebar isSidebar={isSidebar} /> */}
+          {admin && admin.role === "Admin" && <Sidebar />}
           <main className="content">
+          {admin && admin.role !== "Admin" && <Header />}
             <Header />
             {/* <Topbar setIsSidebar={setIsSidebar} /> */}
             <Routes>

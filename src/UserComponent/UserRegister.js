@@ -119,7 +119,7 @@ const UserRegister = () => {
       <div className="mt-2 d-flex aligns-items-center justify-content-center ms-2 me-2 mb-2">
         <div
           className="form-card border-color text-color custom-bg glass"
-          style={{ width: '50rem', marginTop: '100px' }}
+          style={{ width: '50rem', marginTop: '50px', paddingTop: '50px' }}
         >
           <div className="container-fluid">
             <div
@@ -129,7 +129,7 @@ const UserRegister = () => {
                 height: '45px',
               }}
             >
-              <h2 className="card-title">Register Here!</h2>
+              <h2 className="card-title" >Register Here!</h2>
             </div>
             <div className="card-body mt-3">
               <form className="row g-3" onSubmit={saveUser}>

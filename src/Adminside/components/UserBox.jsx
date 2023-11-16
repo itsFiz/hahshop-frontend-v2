@@ -4,43 +4,50 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 // import ProgressCircle from "./ProgressCircle";
 
-const SalesBox = ({ subtitle, icon }) => {
+const UserBox = ({ subtitle, icon }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [sales, setSales] = useState(0);
-  const admin_jwtToken = sessionStorage.getItem("admin-jwtToken");
+  const [allSeller, setAllSeller] = useState([]);
+  const [totalSeller, setTotalSeller] = useState(0);
+  const admin_jwtToken = sessionStorage.getItem('admin-jwtToken')
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/api/order/fetch/all",
-          {
-            headers: {
-              Authorization: "Bearer " + admin_jwtToken,
-            },
-          }
-        );
-
-        const allOrders = response.data.orders || [];
-        setSales(
-          allOrders.reduce((acc, order) => {
-            const orderAmount = order.product.price * order.quantity;
-            return acc + orderAmount;
-          }, 0)
-        );
-      } catch (error) {
-        console.error("Error fetching orders:", error);
+    const getAllUsers = async () => {
+      const allUsers = await retrieveAllUser()
+      if (allUsers) {
+        setAllSeller(allUsers.users)
       }
+    }
+
+    getAllUsers()
+  }, [])
+
+  useEffect(() => {
+    const getTotalSeller = async() => {
+    // count total sellers
+    const totalSellers = allSeller.length;
+    setTotalSeller(totalSellers);
+
     };
+    getTotalSeller();
+  },[allSeller]);
 
-    fetchData();
-  }, [admin_jwtToken]);
-
+  const retrieveAllUser = async () => {
+    const response = await axios.get(
+      'http://localhost:8080/api/user/fetch/role-wise?role=Customer',
+      {
+        headers: {
+          Authorization: 'Bearer ' + admin_jwtToken, // Replace with your actual JWT token
+        },
+      }
+    )
+    console.log(response.data)
+    return response.data
+  }
 
   return (
-    <Box width="100%" m="30px 30px 40px 50px">
+    <Box width="100%" m="30px 30px 40px 40px">
       <Box display="flex" alignItems="center" mt="20px 20px 20px 20px">
         <Typography variant="h5" sx={{ color: colors.greenAccent[500] }}>
           {subtitle}
@@ -55,11 +62,11 @@ const SalesBox = ({ subtitle, icon }) => {
         <Box display="flex" alignItems="center">
           {icon}
           <Typography
-            variant="h3"
+            variant="h4"
             fontWeight="bold"
             sx={{ color: colors.grey[100], marginLeft: 2 }}
           >
-            RM {sales}
+            {totalSeller} Customers
           </Typography>
         </Box>
         {/* <Box>
@@ -70,4 +77,4 @@ const SalesBox = ({ subtitle, icon }) => {
   );
 };
 
-export default SalesBox;
+export default UserBox;
