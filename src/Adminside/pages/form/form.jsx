@@ -118,7 +118,8 @@ const Form = () => {
                   <TextField
                     type="email"
                     fullWidth
-                    variant="outlined"
+                    variant = "outlined"
+              style={{backgroundColor: 'white'}}
                   
                     id="email"
                     name="emailId"
@@ -133,7 +134,8 @@ const Form = () => {
                   <TextField
                 type={showPassword ? 'text' : 'password'}
                 fullWidth
-                variant="outlined"
+                variant = "outlined"
+              style={{backgroundColor: 'white'}}
                 id="password"
                 name="password"
                 onChange={handleUserInput}

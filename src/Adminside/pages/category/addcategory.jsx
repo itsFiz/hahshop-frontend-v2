@@ -136,7 +136,8 @@ function CategoryForm() {
             <TextField
               fullWidth
               id="title"
-              variant="outlined"
+              variant = "outlined"
+              style={{backgroundColor: 'white'}}
               placeholder="Enter category.."
               onChange={(e) => {
                 setName(e.target.value);
@@ -155,7 +156,8 @@ function CategoryForm() {
             <TextField
               fullWidth
               id="description"
-              variant="outlined"
+              variant = "outlined"
+              style={{backgroundColor: 'white'}}
               placeholder="Enter description.."
               onChange={(e) => {
                 setDescription(e.target.value);
