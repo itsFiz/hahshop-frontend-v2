@@ -118,7 +118,7 @@ const ViewAllSellers = () => {
           }}
         >
           <div className="table-responsive">
-            <table className="table table-hover text-color text-center">
+            <table className="table  text-color text-center">
               <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
                   <th scope="col">First Name</th>

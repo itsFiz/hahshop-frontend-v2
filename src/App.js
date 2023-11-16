@@ -51,27 +51,28 @@ function App() {
 
   const user = JSON.parse(sessionStorage.getItem("active-customer"));
   const admin = JSON.parse(sessionStorage.getItem("active-admin"));
-  const deliveryPerson = JSON.parse(sessionStorage.getItem("active-delivery"));
   const seller = JSON.parse(sessionStorage.getItem("active-seller"));
 
     // Redirect to /dashboard if the user is an admin
-    useEffect(() => {
-      if (admin && admin.role === "Admin") {
-        navigate("/dashboard");
-      }
-    }, [admin, navigate]);
+    // useEffect(() => {
+    //   if (admin && admin.role === "Admin") {
+    //     navigate("/dashboard");
+    //   }
+    // }, [admin, navigate]);
 
+    
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Header />
+          {admin && admin.role === "Admin" && <Sidebar />}
           {/* <Sidebar isSidebar={isSidebar} /> */}
           <main className="content">
             {/* <Topbar setIsSidebar={setIsSidebar} /> */}
+            {admin && admin.role !== "Admin" && <Header />}
+            <Header />
             <Routes>
-              
               {/* <Route path="/login" element={<LoginPage />} /> */}
               <Route path="/home" element={<HomePage />} />
               <Route path="/dashboard" element={<Dashboard />} />

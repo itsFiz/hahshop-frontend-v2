@@ -11,6 +11,8 @@ import StatBox from "../../components/StatBox";
 import { usePDF } from "react-to-pdf";
 import SalesBox from "../../components/SalesBox";
 import ProductBox from "../../components/ProductBox";
+import Sidebar from "../global/SideBar";
+import { useState} from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -24,8 +26,11 @@ const Dashboard = () => {
     }
   };
 
+  const [isSidebar, setIsSidebar] = useState(true);
+
   return (
     <Box m="20px" ref={targetRef}>
+    {/* <Sidebar isSidebar={isSidebar} /> */}
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="ADMIN DASHBOARD" subtitle="Welcome to your dashboard" />
