@@ -100,21 +100,22 @@ body,
 }
 
 .pg-background{
-  background-image: url('C:\Users\harit\hahshop-frontend-v2\src\background-100.jpg'); 
+  background-image: url('C:\Users\Alif Danish\Desktop\hahshop\hahshop-frontend-v2\src\background-100.jpg'); 
   background-size: cover; 
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
+  height: 100%;
 }
 
 .pg-blur {
   background: rgba(0, 0, 0, 0.45);
-border-radius: 16px;
+/* border-radius: 16px; */
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(6px);
 -webkit-backdrop-filter: blur(6px);
+background-size: cover; 
 border: 1px solid rgba(255, 255, 255, 0.3);
-height: 100vh;
+height: 100%;
 }
 
 
